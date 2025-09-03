@@ -1,0 +1,35 @@
+# Compiled object files
+*.o
+*.obj
+
+# Compiled binary executables
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+
+# Debug and release folders (common in IDEs)
+Debug/
+Release/
+x64/
+x86/
+build/
+bin/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Mac / Linux system files
+.DS_Store
+*.swp
