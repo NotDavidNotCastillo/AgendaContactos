@@ -1,0 +1,12 @@
+# Ignore build artifacts
+*.exe
+*.o
+*.out
+
+# Ignore IDE settings
+.vscode/
+.idea/
+
+# Ignore temporary files
+*.log
+*.tmp
