@@ -1,12 +1,35 @@
-# Ignore build artifacts
-*.exe
+# Compiled object files
 *.o
-*.out
+*.obj
 
-# Ignore IDE settings
+# Compiled binary executables
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+
+# Debug and release folders (common in IDEs)
+Debug/
+Release/
+x64/
+x86/
+build/
+bin/
+
+# IDE and editor files
 .vscode/
 .idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-# Ignore temporary files
+# Logs and temp files
 *.log
 *.tmp
+
+# Mac / Linux system files
+.DS_Store
+*.swp
