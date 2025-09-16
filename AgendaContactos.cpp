@@ -44,14 +44,14 @@ void agregarContacto(Nodo*& cabeza) {
     getline(cin, tel);
     while (!validarTelefono(tel)) {
         cout << "Error.\nEl numero solo debe tener digitos y como minimo 8.\n" 
-             << "Ingrese el telefono del contacto en formato XXXXXXXX:";
+             << "Ingrese el telefono del contacto en formato XXXXXXXX: ";
         getline(cin, tel);
     }
 
-    cout << "Ingrese el correo del contacto: ";
+    cout << "Ingrese el correo del contacto (debe contener @): ";
     getline(cin, cor);
     while (!validarCorreo(cor)) {
-        cout << "El correo debe contener una @.\nIntente de nuevo\n";
+        cout << "El correo debe contener una @. Intente de nuevo: ";
         getline(cin, cor);
     }
 
@@ -80,31 +80,29 @@ void agregarContacto(Nodo*& cabeza) {
     cout << "\nContacto agregado correctamente.\n";
 }
 
-
 // Mostramos 
-void mostrarContactos(Nodo* cabeza) {
+void mostrarContactos(const Nodo* cabeza) {
     // Verifamos que no este vacio
     if (!cabeza) {
         cout << "La agenda está vacía.\n";
         return;
     }
-    Nodo* actual = cabeza;
 
     cout << "\n--- 📋 LISTA DE CONTACTOS ---\n";
 
-    // recorremos actual para imprimir los contactos
-    while (actual) {
-        cout << "Nombre: " << actual->nombre << endl;
-        cout << "Teléfono: " << actual->telefono << endl;
-        cout << "Correo: " << actual->correo << endl;
+    // recorremos todo el nodo para imprimir los contactos
+    while (cabeza) {
+        cout << "Nombre: " << cabeza->nombre << endl;
+        cout << "Teléfono: " << cabeza->telefono << endl;
+        cout << "Correo: " << cabeza->correo << endl;
         cout << "-------------------------\n";
-        // Pasamos al siguiente elemento de actual
-        actual = actual->siguiente;
+        // Pasamos al siguiente elemento de nuestro nodo (cabeza)
+        cabeza = cabeza->siguiente;
     }
 }
 
 // Buscador de contactos
-void buscarContacto(Nodo* cabeza) {
+void buscarContacto(const Nodo* cabeza) {
     // Verificamos si la lista esta vacia
     if (!cabeza) {
         cout << "La agenda está vacía.\n";
@@ -115,16 +113,16 @@ void buscarContacto(Nodo* cabeza) {
     cout << "Ingrese el nombre a buscar: ";
     getline(cin, nombre);
 
-    Nodo* actual = cabeza;
-    while (actual) {
-        if (actual->nombre == nombre) {
+    while (cabeza) {
+        if (cabeza->nombre == nombre) {
             cout << "\n Contacto encontrado:\n";
-            cout << "Nombre: " << actual->nombre << endl;
-            cout << "Teléfono: " << actual->telefono << endl;
-            cout << "Correo: " << actual->correo << endl;
+            cout << "Nombre: " << cabeza->nombre << endl;
+            cout << "Teléfono: " << cabeza->telefono << endl;
+            cout << "Correo: " << cabeza->correo << endl;
             return;
         }
-        actual = actual->siguiente;
+        // Recorremos el nodo uno por uno
+        cabeza = cabeza->siguiente;
     }
     cout << "No se encontró un contacto con ese nombre.\n";
 }
@@ -175,37 +173,55 @@ void eliminarContacto(Nodo*& cabeza) {
 
 // Borramos los nodos creados
 void liberarMemoria(Nodo*& cabeza) {
-
     while (cabeza) {
         Nodo* temp = cabeza;
-
         // Recorremos cabeza nodo por nodo
         cabeza = cabeza->siguiente;
         delete temp;
     }
 }
 
-/*
-bool Menu(){
+void menu(Nodo*& contactos){
     int opc;
-    
+
     do{
+        cout << "\n===== MENÚ AGENDA DE CONTACTOS =====\n";
+        cout << "1. Agregar contacto\n";
+        cout << "2. Mostrar contactos\n";
+        cout << "3. Buscar contacto\n";
+        cout << "4. Eliminar contacto\n";
+        cout << "5. Salir\n";
+        cout << "Seleccione una opción: ";
+        cin >> opc;
+        cin.ignore();
 
-
+        switch(opc) {
+            case 1: 
+                agregarContacto(contactos); 
+                break;
+            case 2: 
+                mostrarContactos(contactos); 
+                break;
+            case 3: 
+                buscarContacto(contactos); 
+                break;
+            case 4:  
+                eliminarContacto(contactos); 
+                break;
+            case 5: 
+                cout << "Saliendo...\n"; 
+                break;
+            default:    
+                cout << "Opción inválida.\n";
+                break;
+        }
     }while(opc != 5);
-    
-    return false;
+
+    liberarMemoria(contactos);
 }
-*/
-Nodo *contacto = new Nodo();
+
 int main (){
-    agregarContacto(contacto);
-
-    mostrarContactos(contacto);
-
-
-    
-
-    liberarMemoria(contacto);
+    Nodo* contactos = nullptr;
+    menu(contactos);
     return 0;
-}
+}   
