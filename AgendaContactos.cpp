@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Nodo de Contactos
 struct Nodo {
     string nombre, telefono, correo;
     Nodo* siguiente;
@@ -88,7 +89,7 @@ void mostrarContactos(const Nodo* cabeza) {
         return;
     }
 
-    cout << "\n--- 📋 LISTA DE CONTACTOS ---\n";
+    cout << "\n--- LISTA DE CONTACTOS ---\n";
 
     // recorremos todo el nodo para imprimir los contactos
     while (cabeza) {
@@ -115,7 +116,7 @@ void buscarContacto(const Nodo* cabeza) {
 
     while (cabeza) {
         if (cabeza->nombre == nombre) {
-            cout << "\n Contacto encontrado:\n";
+            cout << "\nContacto encontrado:\n";
             cout << "Nombre: " << cabeza->nombre << endl;
             cout << "Teléfono: " << cabeza->telefono << endl;
             cout << "Correo: " << cabeza->correo << endl;
@@ -148,7 +149,6 @@ void eliminarContacto(Nodo*& cabeza) {
         actual = actual->siguiente;
     }
 
-    // No se encontro el nombre
     // Si actual es nullptr entonces salimos del metodo
     if (!actual) {
         cout << "No se encontró un contacto con ese nombre.\n";
@@ -167,6 +167,7 @@ void eliminarContacto(Nodo*& cabeza) {
         anterior->siguiente = actual->siguiente;
     }
 
+    // Eliminamos la direccion en memoria de actual
     delete actual;
     cout << "Contacto eliminado correctamente.\n";
 }
@@ -175,7 +176,7 @@ void eliminarContacto(Nodo*& cabeza) {
 void liberarMemoria(Nodo*& cabeza) {
     while (cabeza) {
         Nodo* temp = cabeza;
-        // Recorremos cabeza nodo por nodo
+        // Pasamos a la siguiente posicion del nodo por eliminar sin problemas
         cabeza = cabeza->siguiente;
         delete temp;
     }
