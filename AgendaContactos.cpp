@@ -155,12 +155,10 @@ void eliminarContacto(Nodo*& cabeza) {
         return;
     }
 
-    // Si anterior es un nullptr, el nodo que eliminamos sera la cabeza
+    // Si anterior es un nullptr, entonces elimaremos el
+    // primer elemento
     if (!anterior) {
-        // cabeza ahora sera un nullptr
-        // o lo que es lo mismo actual->siguiente 
         cabeza = actual->siguiente; 
-
     } else {
         // conectamos el nodo anterior a actual con el 
         // siguiente nodo (actual -> siguiente)
